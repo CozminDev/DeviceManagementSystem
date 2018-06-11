@@ -1,0 +1,41 @@
+<div class="main-div">
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title><h3>Register</h3></mat-card-title>
+        </mat-card-header>
+        <br />
+        <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
+        <mat-card-content>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Name" [(ngModel)]="registerInfo.Name" name="Name">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Password" [(ngModel)]="registerInfo.password" type="password" name="password">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Location" [(ngModel)]="registerInfo.location" name="location" >
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="onRegister()" color="primary" style="margin-left:40%">Register</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

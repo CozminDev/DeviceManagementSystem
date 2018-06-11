@@ -1,0 +1,34 @@
+<div class="main-div">
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title><h3>Login</h3></mat-card-title>
+        </mat-card-header>
+        <br />
+        <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        <mat-card-content>
+
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Name" [(ngModel)]="loginInfo.Name" name="Name" required>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Password" [(ngModel)]="loginInfo.password" type="password" name="password" required>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="onLogin()" color="primary" style="margin-left:40%">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

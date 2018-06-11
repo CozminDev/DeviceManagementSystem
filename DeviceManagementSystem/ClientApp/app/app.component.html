@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <mat-icon class="example-icon">important_devices</mat-icon>
+        <button mat-button (click)="goToDevices()" *ngIf="isLoggedIn()">Devices</button>
+        <button mat-button (click)="goToAddDevice()" *ngIf="isLoggedIn()">Add Device</button>
+        <button mat-button (click)="goToRegister()" *ngIf="!isLoggedIn()">Register</button>
+        <span class="example-spacer"></span>
+        <button mat-button (click)="Logout()" *ngIf="isLoggedIn()">Logout</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet>
+</router-outlet>

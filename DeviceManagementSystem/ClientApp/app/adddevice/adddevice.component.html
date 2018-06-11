@@ -1,0 +1,67 @@
+<div class="main-div">
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title><h3>Add Device</h3></mat-card-title>
+        </mat-card-header>
+        <br />
+        <mat-card-content>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Name" [(ngModel)]="addInfo.Name" name="Name">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Manufacturer" [(ngModel)]="addInfo.manufacturer" name="manufacturer">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Type" [(ngModel)]="addInfo.type" name="type">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="OS" [(ngModel)]="addInfo.OS" name="OS">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="OSVersion" [(ngModel)]="addInfo.OSVersion" name="OSVersion">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="Processor" [(ngModel)]="addInfo.Processor" name="Processor">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field style="width:350px !important;" class="example-full-width">
+                                <input matInput placeholder="RAM" [(ngModel)]="addInfo.ram" name="ram">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="AddDevice()" color="primary" style="margin-left:40%">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

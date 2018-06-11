@@ -1,0 +1,32 @@
+<div class="container" style="margin-top:50px">
+    <div *ngFor="let element of devices">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <h6> {{element.name}}</h6>
+                </mat-panel-title>
+                <mat-panel-description *ngIf="(!element.user)">
+                    <div style="color:green">Available</div>
+                </mat-panel-description>
+                <mat-panel-description *ngIf="(element.user)">
+                    <div style="color:red">Unavailable</div>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-list role="list">
+                <mat-list-item role="listitem">Manufacturer: {{element.manufacturer}}</mat-list-item>
+                <mat-list-item role="listitem">Type: {{element.type}}</mat-list-item>
+                <mat-list-item role="listitem">OS: {{element.os}}</mat-list-item>
+                <mat-list-item role="listitem">OSVersion: {{element.osVersion}}</mat-list-item>
+                <mat-list-item role="listitem">Processor: {{element.processor}}</mat-list-item>
+                <mat-list-item role="listitem">RAM: {{element.ram}}</mat-list-item>
+                <mat-list-item role="listitem">
+                    <button mat-button color="primary" (click)="assignItem(element.id)" *ngIf="!(element.user); else unassign">Assign</button>
+                    <ng-template #unassign>
+                        <button mat-button color="primary" (click)="unassignItem(element.id)" *ngIf="checkUser(element.user.name)" >Unassign</button>
+                    </ng-template>
+                    <button mat-button color="warn" (click)="removeItem(element.id)">Delete</button>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+    </div>
+</div>
