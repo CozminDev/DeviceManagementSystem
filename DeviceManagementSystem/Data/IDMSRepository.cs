@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using DeviceManagementSystem.Data.Entities;
-using DeviceManagementSystem.ViewModels;
+﻿using DeviceManagementSystem.Data.Entities;
+using System.Collections.Generic;
 
 namespace DeviceManagementSystem.Data
 {
