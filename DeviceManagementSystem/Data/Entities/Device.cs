@@ -16,7 +16,7 @@ namespace DeviceManagementSystem.Data.Entities
         public string OSVersion { get; set; }
         public string Processor { get; set; }
         public string RAM { get; set; }
-        public DMSUser User { get; set; }
+        public User User { get; set; }
 
     }
 }

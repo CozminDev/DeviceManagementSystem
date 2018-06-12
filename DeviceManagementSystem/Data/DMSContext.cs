@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DeviceManagementSystem.Data
 {
-    public class DMSContext:IdentityDbContext<DMSUser>
+    public class DMSContext:IdentityDbContext<User>
     {
         public DMSContext(DbContextOptions<DMSContext> options):base(options)
         {

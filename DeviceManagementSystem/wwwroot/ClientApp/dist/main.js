@@ -907,7 +907,7 @@ var DataService = /** @class */ (function () {
         });
     };
     DataService.prototype.assignDevice = function (id) {
-        return this.http.patch("api/devices/" + id, { Name: localStorage.getItem('user') }, {
+        return this.http.patch("api/devices/assign/" + id, { Name: localStorage.getItem('user') }, {
             observe: 'response',
             responseType: 'text'
         });

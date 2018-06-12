@@ -1,12 +1,7 @@
-﻿using DeviceManagementSystem.Data;
-using DeviceManagementSystem.Data.Entities;
+﻿using DeviceManagementSystem.Data.Entities;
 using DeviceManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DeviceManagementSystem.Controllers
@@ -14,13 +9,11 @@ namespace DeviceManagementSystem.Controllers
     [Route("api/account")]
     public class AccountController:Controller
     {
-        private readonly DMSContext _ctx;
-        private readonly UserManager<DMSUser> _userManager;
-        private readonly SignInManager<DMSUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(DMSContext ctx,UserManager<DMSUser> userManager,SignInManager<DMSUser> signInManager)
+        public AccountController(UserManager<User> userManager,SignInManager<User> signInManager)
         {
-            _ctx = ctx;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -33,7 +26,7 @@ namespace DeviceManagementSystem.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userIdentity = new DMSUser
+            var userIdentity = new User
             {
                 Name = model.Name,
                 Location=model.Location,
@@ -64,7 +57,7 @@ namespace DeviceManagementSystem.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userIdentity = new DMSUser
+            var userIdentity = new User
             {
                 Name = model.Name,
                 UserName = model.Name

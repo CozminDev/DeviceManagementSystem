@@ -30,7 +30,7 @@ export class DataService {
     }
 
     assignDevice(id) {
-        return this.http.patch("api/devices/" + id, { Name: localStorage.getItem('user') },
+        return this.http.patch("api/devices/assign/" + id, { Name: localStorage.getItem('user') },
             {
                 observe: 'response',
                 responseType: 'text'

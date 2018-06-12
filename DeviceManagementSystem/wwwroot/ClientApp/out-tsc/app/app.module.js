@@ -36,10 +36,12 @@ var routes = [
     {
         path: 'devices',
         component: devices_component_1.DevicesComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'adddevice',
         component: adddevice_component_1.AdddeviceComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     }
 ];
 var AppModule = /** @class */ (function () {

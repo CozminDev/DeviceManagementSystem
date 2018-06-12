@@ -37,7 +37,7 @@ namespace DeviceManagementSystem
 
             services.AddTransient<IDMSRepository, DMSRepository>();
 
-            services.AddIdentity<DMSUser, IdentityRole>().AddEntityFrameworkStores<DMSContext>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DMSContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,15 +1,10 @@
 ﻿using DeviceManagementSystem.Data;
 using DeviceManagementSystem.Data.Entities;
 using DeviceManagementSystem.ViewModels;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DeviceManagementSystem.Controllers
@@ -19,9 +14,9 @@ namespace DeviceManagementSystem.Controllers
     {
         private readonly IDMSRepository _repo;
         private readonly ILogger<DevicesController> _logger;
-        private readonly UserManager<DMSUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public DevicesController(IDMSRepository repo, ILogger<DevicesController> logger, UserManager<DMSUser> userManager)
+        public DevicesController(IDMSRepository repo, ILogger<DevicesController> logger, UserManager<User> userManager)
         {
             _repo = repo;
             _logger = logger;
@@ -39,8 +34,9 @@ namespace DeviceManagementSystem.Controllers
             catch (Exception ex)
             {
 
-                _logger.LogInformation($"Couldn't get devices: {ex}");
-                return BadRequest("Couldn't get devices");
+                _logger.LogInformation($"Cannot get Devices: {ex}");
+
+                return StatusCode(500, "Cannot get Devices");
             }
         }
 
@@ -49,7 +45,7 @@ namespace DeviceManagementSystem.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Information incorrect!");
+                return BadRequest(ModelState);
             }
             var result = new Device
             {
@@ -65,44 +61,43 @@ namespace DeviceManagementSystem.Controllers
 
             if (_repo.SaveChanges())
             {
-                return Ok("Device Added!");
+                return Ok("Device Added");
             }
 
-            return BadRequest("Can't add Device");
-
-
+            return StatusCode(500, "Cannot add Device");
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("assign/{id}")]
         public async Task<IActionResult> AssignDevice(int id, [FromBody] AssignModel model)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Model is not Valid");
+                return BadRequest(ModelState);
             }
             var user = await _userManager.FindByNameAsync(model.Name);
             if (user != null)
             {
-                var result = _repo.GetDeviceById(id).User = user;
+                _repo.AssignDevice(id, user);
                 if (_repo.SaveChanges())
                 {
                     return Ok();
                 }
             }
-            return BadRequest("Can't assign User");
+
+            return StatusCode(500, "Cannot assign Device");
 
         }
 
         [HttpPatch("unassign/{id}")]
         public IActionResult UnassignDevice(int id)
         {
-            var device = _repo.GetDeviceById(id);
-            device.User = null;
+            _repo.UnassignDevice(id);
             if (_repo.SaveChanges())
             {
                 return Ok();
             }
-            return BadRequest();
+
+            return StatusCode(500, "Cannot unassign Device");
 
         }
 
@@ -114,7 +109,8 @@ namespace DeviceManagementSystem.Controllers
             {
                 return Ok();
             }
-            return BadRequest();
+
+            return StatusCode(500, "Cannot remove Device");
         }
     }
 }

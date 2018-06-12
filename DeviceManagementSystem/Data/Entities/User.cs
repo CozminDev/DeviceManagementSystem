@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DeviceManagementSystem.Data.Entities
 {
-    public class DMSUser : IdentityUser
+    public class User : IdentityUser
     {
         public string Name { get; set; }
         public string Location { get; set; }
