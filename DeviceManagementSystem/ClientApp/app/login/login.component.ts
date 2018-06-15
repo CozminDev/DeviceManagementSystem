@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { Router,NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from '../service/data.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
 
-        
+
     }
     public errorMessage: string;
 
@@ -33,10 +33,8 @@ export class LoginComponent implements OnInit {
                 return this.router.navigate(["devices"])
             }
         }, err => {
-                this.errorMessage = "Invalid Account"
-            })
-
-       
+            this.errorMessage = "Invalid Account"
+        })
     }
 
 

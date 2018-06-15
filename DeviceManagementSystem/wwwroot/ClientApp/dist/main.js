@@ -282,7 +282,7 @@ module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn()\">Add Device</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"Logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<router-outlet>\r\n</router-outlet>\r\n"
+module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn()\">Add Device</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"Logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<main>\r\n    <router-outlet>\r\n    </router-outlet>\r\n</main>\r\n\r\n"
 
 /***/ }),
 

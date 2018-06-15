@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DeviceManagementSystem.Data;
+using DeviceManagementSystem.Data.Admin;
 using DeviceManagementSystem.Data.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +38,17 @@ namespace DeviceManagementSystem
 
             services.AddTransient<IDMSRepository, DMSRepository>();
 
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DMSContext>();
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+
+            }).AddEntityFrameworkStores<DMSContext>();
+
+            services.AddTransient<CreateAdmin>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +67,12 @@ namespace DeviceManagementSystem
                     new { controller = "Home", action = "Index" });
             });
 
-            
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetService<CreateAdmin>();
+
+                seeder.createAdminRoleandUser().Wait();
+            }
 
 
         }
