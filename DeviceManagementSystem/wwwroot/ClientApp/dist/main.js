@@ -271,7 +271,7 @@ var AdddeviceComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n.example-icon{\r\n    cursor: pointer;\r\n}\r\n"
+module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n.example-icon{\r\n    cursor: pointer;\r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -548,7 +548,7 @@ module.exports = ".mat-list-item{\r\n    font-size:15px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" style=\"margin-top:50px\">\r\n    <div *ngFor=\"let element of devices\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    <h6> {{element.name}}</h6>\r\n                </mat-panel-title>\r\n                <mat-panel-description *ngIf=\"(!element.user)\">\r\n                    <div style=\"color:green\">Available</div>\r\n                </mat-panel-description>\r\n                <mat-panel-description *ngIf=\"(element.user)\">\r\n                    <div style=\"color:red\">Unavailable</div>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <mat-list role=\"list\">\r\n                <mat-list-item role=\"listitem\">Manufacturer: {{element.manufacturer}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Type: {{element.type}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OS: {{element.os}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OSVersion: {{element.osVersion}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Processor: {{element.processor}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">RAM: {{element.ram}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\" *ngIf=\"(element.user)&&isAdmin()\">Used by: {{element.user.name}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">\r\n                    <button mat-button color=\"primary\" (click)=\"assignItem(element.id)\" *ngIf=\"!(element.user); else unassign\">Assign</button>\r\n                    <ng-template #unassign>\r\n                        <button mat-button color=\"primary\" (click)=\"unassignItem(element.id)\" *ngIf=\"checkUser(element.user.name)|| isAdmin()\">Unassign</button>\r\n                    </ng-template>\r\n                    <button mat-button color=\"warn\" (click)=\"removeItem(element.id)\" *ngIf=\"isAdmin()&&!(element.user)\">Delete</button>\r\n                </mat-list-item>\r\n            </mat-list>\r\n        </mat-expansion-panel>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\" style=\"margin-top:50px\">\r\n    <div *ngFor=\"let element of devices\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    <h6> {{element.name}}</h6>\r\n                </mat-panel-title>\r\n                <mat-panel-description *ngIf=\"(!element.user)\">\r\n                    <div style=\"color:#64cc64\">Available</div>\r\n                </mat-panel-description>\r\n                <mat-panel-description *ngIf=\"(element.user)\">\r\n                    <div style=\"color:#d03535\">Unavailable</div>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <mat-list role=\"list\">\r\n                <mat-list-item role=\"listitem\">Manufacturer: {{element.manufacturer}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Type: {{element.type}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OS: {{element.os}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OSVersion: {{element.osVersion}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Processor: {{element.processor}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">RAM: {{element.ram}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\" *ngIf=\"(element.user)\">Assigned to: {{element.user.name}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">\r\n                    <button mat-button color=\"primary\" (click)=\"assignItem(element.id)\" *ngIf=\"!(element.user); else unassign\">Assign</button>\r\n                    <ng-template #unassign>\r\n                        <button mat-button color=\"primary\" (click)=\"unassignItem(element.id)\" *ngIf=\"checkUser(element.user.name)|| isAdmin()\">Unassign</button>\r\n                    </ng-template>\r\n                    <button mat-button color=\"warn\" (click)=\"removeItem(element.id)\" *ngIf=\"isAdmin()&&!(element.user)\">Delete</button>\r\n                </mat-list-item>\r\n            </mat-list>\r\n        </mat-expansion-panel>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -751,7 +751,7 @@ module.exports = "\r\n.center {\r\n    width: 75%;\r\n    margin: 10px auto;\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main-div\">\r\n    <mat-card class=\"example-card center\">\r\n        <mat-card-header>\r\n            <mat-card-title><h3>Register</h3></mat-card-title>\r\n        </mat-card-header>\r\n        <br />\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\r\n        <div class=\"alert alert-success\" *ngIf=\"successMessage\">{{successMessage}}</div>\r\n        <mat-card-content>\r\n            <form>\r\n                <table>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Name\" [(ngModel)]=\"registerInfo.Name\" name=\"Name\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Password\" [(ngModel)]=\"registerInfo.password\" type=\"password\" name=\"password\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Location\" [(ngModel)]=\"registerInfo.location\" name=\"location\" >\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n            </form>\r\n            <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n            <button mat-raised-button (click)=\"onRegister()\" color=\"primary\" style=\"margin-left:40%\">Register</button>\r\n        </mat-card-actions>\r\n    </mat-card>\r\n</div>\n"
+module.exports = "<div class=\"main-div\">\r\n    <mat-card class=\"example-card center\">\r\n        <mat-card-header>\r\n            <mat-card-title><h3>Register</h3></mat-card-title>\r\n        </mat-card-header>\r\n        <br />\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\"><div *ngFor=\"let error of errorMessage\">{{error}}</div></div>\r\n        <div class=\"alert alert-success\" *ngIf=\"successMessage\">{{successMessage}}</div>\r\n        <mat-card-content>\r\n            <form>\r\n                <table>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Name\" [(ngModel)]=\"registerInfo.Name\" name=\"Name\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Password\" [(ngModel)]=\"registerInfo.password\" type=\"password\" name=\"password\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Location\" [(ngModel)]=\"registerInfo.location\" name=\"location\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n            </form>\r\n            <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n            <button mat-raised-button (click)=\"onRegister()\" color=\"primary\" style=\"margin-left:40%\">Register</button>\r\n        </mat-card-actions>\r\n    </mat-card>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -796,15 +796,17 @@ var RegisterComponent = /** @class */ (function () {
         var _this = this;
         this.auth.Register(this.registerInfo).subscribe(function (success) {
             if (success.status == 200) {
+                console.log(success);
                 _this.successMessage = "Registration successful!";
             }
         }, function (err) {
-            _this.errorMessage = "Failed to Register";
+            console.log(err);
+            _this.errorMessage = err.error;
         });
         this.registerInfo.Name = '';
         this.registerInfo.password = '';
         this.registerInfo.location = '';
-        this.errorMessage = '';
+        this.errorMessage = [];
         this.successMessage = '';
     };
     RegisterComponent = __decorate([
@@ -870,7 +872,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.Register = function (registerInfo) {
         return this.http.post("api/account/register", registerInfo, {
             observe: 'response',
-            responseType: 'text'
+            responseType: 'json'
         });
     };
     AuthService = __decorate([

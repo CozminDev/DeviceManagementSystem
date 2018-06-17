@@ -2,6 +2,7 @@
 using DeviceManagementSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeviceManagementSystem.Controllers
@@ -43,8 +44,13 @@ namespace DeviceManagementSystem.Controllers
 
             if (result != IdentityResult.Success)
             {
-                return BadRequest("Failed to Create User");
+                List<string> errors = new List<string>();
 
+                foreach (IdentityError error in result.Errors)
+                {
+                    errors.Add(error.Description);
+                }
+                return BadRequest(errors);
             }
             return new OkObjectResult("Account created");
         }

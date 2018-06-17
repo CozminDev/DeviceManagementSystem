@@ -6,10 +6,10 @@
                     <h6> {{element.name}}</h6>
                 </mat-panel-title>
                 <mat-panel-description *ngIf="(!element.user)">
-                    <div style="color:green">Available</div>
+                    <div style="color:#64cc64">Available</div>
                 </mat-panel-description>
                 <mat-panel-description *ngIf="(element.user)">
-                    <div style="color:red">Unavailable</div>
+                    <div style="color:#d03535">Unavailable</div>
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-list role="list">
@@ -19,7 +19,7 @@
                 <mat-list-item role="listitem">OSVersion: {{element.osVersion}}</mat-list-item>
                 <mat-list-item role="listitem">Processor: {{element.processor}}</mat-list-item>
                 <mat-list-item role="listitem">RAM: {{element.ram}}</mat-list-item>
-                <mat-list-item role="listitem" *ngIf="(element.user)&&isAdmin()">Used by: {{element.user.name}}</mat-list-item>
+                <mat-list-item role="listitem" *ngIf="(element.user)">Assigned to: {{element.user.name}}</mat-list-item>
                 <mat-list-item role="listitem">
                     <button mat-button color="primary" (click)="assignItem(element.id)" *ngIf="!(element.user); else unassign">Assign</button>
                     <ng-template #unassign>

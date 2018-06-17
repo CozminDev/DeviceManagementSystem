@@ -4,7 +4,7 @@
             <mat-card-title><h3>Register</h3></mat-card-title>
         </mat-card-header>
         <br />
-        <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="alert alert-danger" *ngIf="errorMessage"><div *ngFor="let error of errorMessage">{{error}}</div></div>
         <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
         <mat-card-content>
             <form>
@@ -26,7 +26,7 @@
                     <tr>
                         <td>
                             <mat-form-field style="width:350px !important;" class="example-full-width">
-                                <input matInput placeholder="Location" [(ngModel)]="registerInfo.location" name="location" >
+                                <input matInput placeholder="Location" [(ngModel)]="registerInfo.location" name="location">
                             </mat-form-field>
                         </td>
                     </tr>

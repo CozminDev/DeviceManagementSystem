@@ -28,10 +28,12 @@ var RegisterComponent = /** @class */ (function () {
         var _this = this;
         this.auth.Register(this.registerInfo).subscribe(function (success) {
             if (success.status == 200) {
+                console.log(success);
                 _this.successMessage = "Registration successful!";
             }
         }, function (err) {
-            _this.errorMessage = "Failed to Register";
+            console.log(err);
+            _this.errorMessage = err.error;
         });
         this.registerInfo.Name = '';
         this.registerInfo.password = '';

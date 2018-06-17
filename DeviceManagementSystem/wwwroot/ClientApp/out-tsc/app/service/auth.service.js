@@ -36,7 +36,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.Register = function (registerInfo) {
         return this.http.post("api/account/register", registerInfo, {
             observe: 'response',
-            responseType: 'text'
+            responseType: 'json'
         });
     };
     AuthService = __decorate([

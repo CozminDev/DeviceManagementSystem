@@ -43,7 +43,7 @@ namespace DeviceManagementSystem
                 options.Password.RequiredLength = 4;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireDigit = false;
 
             }).AddEntityFrameworkStores<DMSContext>();

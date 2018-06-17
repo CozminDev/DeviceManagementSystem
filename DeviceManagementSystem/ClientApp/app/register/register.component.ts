@@ -3,43 +3,45 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private auth:AuthService,private router:Router) { }
+    constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  public errorMessage: string;
-  public successMessage: string;
+    public errorMessage: any[];
+    public successMessage: string;
 
-  public registerInfo = {
-      Name: "",
-      password: "",
-      location:""
-  }
+    public registerInfo = {
+        Name: "",
+        password: "",
+        location: ""
+    }
 
-  onRegister() {
-      this.auth.Register(this.registerInfo).subscribe(success => {
-          if (success.status==200) {
-          this.successMessage = "Registration successful!"
-          
-         
-          }
-      }, err =>
-      {
-          this.errorMessage = "Failed to Register";
-          
-          })
-      this.registerInfo.Name = ''
-      this.registerInfo.password = ''
-      this.registerInfo.location = ''
-      this.errorMessage = '';
-      this.successMessage = '';
-  }
+    onRegister() {
+        this.auth.Register(this.registerInfo).subscribe(success => {
+            if (success.status == 200) {
+                console.log(success);
+                this.successMessage = "Registration successful!"
+
+
+            }
+        }, err => {
+            console.log(err);
+            this.errorMessage = err.error;
+
+        })
+
+        this.registerInfo.Name = ''
+        this.registerInfo.password = ''
+        this.registerInfo.location = ''
+        this.errorMessage = [];
+        this.successMessage = '';
+    }
 
 }

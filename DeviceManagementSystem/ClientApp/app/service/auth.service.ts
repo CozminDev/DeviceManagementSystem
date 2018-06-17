@@ -35,7 +35,7 @@ export class AuthService {
 
         return this.http.post("api/account/register", registerInfo,{
             observe: 'response',
-            responseType: 'text'
+            responseType: 'json'
         });
     }
 
