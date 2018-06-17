@@ -271,7 +271,7 @@ var AdddeviceComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n"
+module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n.example-icon{\r\n    cursor: pointer;\r\n}\r\n"
 
 /***/ }),
 
@@ -282,7 +282,7 @@ module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn()\">Add Device</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"Logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<main>\r\n    <router-outlet>\r\n    </router-outlet>\r\n</main>\r\n\r\n"
+module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToLogin()\" *ngIf=\"!isLoggedIn()\">important_devices</mat-icon>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn() && isAdmin()\">Add Device</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"Logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<main>\r\n    <router-outlet>\r\n    </router-outlet>\r\n</main>\r\n\r\n"
 
 /***/ }),
 
@@ -325,11 +325,21 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.goToRegister = function () {
         return this.router.navigate(['register']);
     };
+    AppComponent.prototype.goToLogin = function () {
+        return this.router.navigate(['']);
+    };
     AppComponent.prototype.goToAddDevice = function () {
         return this.router.navigate(['adddevice']);
     };
     AppComponent.prototype.isLoggedIn = function () {
         return this.auth.isLoggedIn;
+    };
+    AppComponent.prototype.isAdmin = function () {
+        if (localStorage.getItem('user') == 'admin') {
+            return true;
+        }
+        else
+            return false;
     };
     AppComponent.prototype.Logout = function () {
         localStorage.clear();
@@ -538,7 +548,7 @@ module.exports = ".mat-list-item{\r\n    font-size:15px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" style=\"margin-top:50px\">\r\n    <div *ngFor=\"let element of devices\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    <h6> {{element.name}}</h6>\r\n                </mat-panel-title>\r\n                <mat-panel-description *ngIf=\"(!element.user)\">\r\n                    <div style=\"color:green\">Available</div>\r\n                </mat-panel-description>\r\n                <mat-panel-description *ngIf=\"(element.user)\">\r\n                    <div style=\"color:red\">Unavailable</div>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <mat-list role=\"list\">\r\n                <mat-list-item role=\"listitem\">Manufacturer: {{element.manufacturer}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Type: {{element.type}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OS: {{element.os}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OSVersion: {{element.osVersion}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Processor: {{element.processor}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">RAM: {{element.ram}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">\r\n                    <button mat-button color=\"primary\" (click)=\"assignItem(element.id)\" *ngIf=\"!(element.user); else unassign\">Assign</button>\r\n                    <ng-template #unassign>\r\n                        <button mat-button color=\"primary\" (click)=\"unassignItem(element.id)\" *ngIf=\"checkUser(element.user.name)\" >Unassign</button>\r\n                    </ng-template>\r\n                    <button mat-button color=\"warn\" (click)=\"removeItem(element.id)\">Delete</button>\r\n                </mat-list-item>\r\n            </mat-list>\r\n        </mat-expansion-panel>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\" style=\"margin-top:50px\">\r\n    <div *ngFor=\"let element of devices\">\r\n        <mat-expansion-panel>\r\n            <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                    <h6> {{element.name}}</h6>\r\n                </mat-panel-title>\r\n                <mat-panel-description *ngIf=\"(!element.user)\">\r\n                    <div style=\"color:green\">Available</div>\r\n                </mat-panel-description>\r\n                <mat-panel-description *ngIf=\"(element.user)\">\r\n                    <div style=\"color:red\">Unavailable</div>\r\n                </mat-panel-description>\r\n            </mat-expansion-panel-header>\r\n            <mat-list role=\"list\">\r\n                <mat-list-item role=\"listitem\">Manufacturer: {{element.manufacturer}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Type: {{element.type}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OS: {{element.os}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">OSVersion: {{element.osVersion}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">Processor: {{element.processor}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">RAM: {{element.ram}}</mat-list-item>\r\n                <mat-list-item role=\"listitem\">\r\n                    <button mat-button color=\"primary\" (click)=\"assignItem(element.id)\" *ngIf=\"!(element.user); else unassign\">Assign</button>\r\n                    <ng-template #unassign>\r\n                        <button mat-button color=\"primary\" (click)=\"unassignItem(element.id)\" *ngIf=\"checkUser(element.user.name)|| isAdmin()\" >Unassign</button>\r\n                    </ng-template>\r\n                    <button mat-button color=\"warn\" (click)=\"removeItem(element.id)\" *ngIf=\"isAdmin()&&!(element.user)\">Delete</button>\r\n                </mat-list-item>\r\n            </mat-list>\r\n        </mat-expansion-panel>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -610,6 +620,13 @@ var TableComponent = /** @class */ (function () {
     TableComponent.prototype.checkUser = function (user) {
         if (user == localStorage.getItem('user'))
             return true;
+        else
+            return false;
+    };
+    TableComponent.prototype.isAdmin = function () {
+        if (localStorage.getItem('user') == 'admin') {
+            return true;
+        }
         else
             return false;
     };

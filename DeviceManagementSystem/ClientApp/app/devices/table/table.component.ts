@@ -60,6 +60,14 @@ export class TableComponent implements OnInit {
       else return false;
   }
 
+  isAdmin() {
+
+      if (localStorage.getItem('user') == 'admin') {
+          return true;
+      }
+      else return false;
+  }
+
  
 }
 

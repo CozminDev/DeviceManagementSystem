@@ -26,11 +26,21 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.goToRegister = function () {
         return this.router.navigate(['register']);
     };
+    AppComponent.prototype.goToLogin = function () {
+        return this.router.navigate(['']);
+    };
     AppComponent.prototype.goToAddDevice = function () {
         return this.router.navigate(['adddevice']);
     };
     AppComponent.prototype.isLoggedIn = function () {
         return this.auth.isLoggedIn;
+    };
+    AppComponent.prototype.isAdmin = function () {
+        if (localStorage.getItem('user') == 'admin') {
+            return true;
+        }
+        else
+            return false;
     };
     AppComponent.prototype.Logout = function () {
         localStorage.clear();

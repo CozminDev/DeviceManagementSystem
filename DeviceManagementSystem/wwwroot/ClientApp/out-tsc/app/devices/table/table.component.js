@@ -58,6 +58,13 @@ var TableComponent = /** @class */ (function () {
         else
             return false;
     };
+    TableComponent.prototype.isAdmin = function () {
+        if (localStorage.getItem('user') == 'admin') {
+            return true;
+        }
+        else
+            return false;
+    };
     TableComponent = __decorate([
         core_1.Component({
             selector: 'app-table',

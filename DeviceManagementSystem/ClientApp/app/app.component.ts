@@ -23,6 +23,9 @@ export class AppComponent {
     {
         return this.router.navigate(['register'])
     }
+    goToLogin() {
+        return this.router.navigate([''])
+    }
     goToAddDevice() {
         return this.router.navigate(['adddevice'])
     }
@@ -30,6 +33,16 @@ export class AppComponent {
     isLoggedIn() {
         return this.auth.isLoggedIn
     }
+
+    isAdmin() {
+
+        if (localStorage.getItem('user') == 'admin')
+        {
+            return true;
+        }
+        else return false;
+    }
+
     Logout() {
         localStorage.clear();
         return this.reloadPage();
