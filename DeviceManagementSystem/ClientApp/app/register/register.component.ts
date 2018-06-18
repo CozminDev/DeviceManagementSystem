@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
     }
 
-    public errorMessage: any[];
+    public errorMessage: any[]  = [];
     public successMessage: string;
 
     public registerInfo = {

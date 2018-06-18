@@ -6,10 +6,12 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-//AuthGuard
+
 import { AuthGuard } from './Guard/auth.guard';
 import { DataService } from './service/data.service';
 import { AuthService } from './service/auth.service';
+import { LoginGuard } from './Guard/login.guard';
+import { AdminGuard } from './Guard/admin.guard';
 
 
 import { AppComponent } from './app.component';
@@ -18,11 +20,13 @@ import { LoginComponent } from './login/login.component';
 import { DevicesComponent } from './devices/devices.component';
 import { TableComponent } from './devices/table/table.component';
 import { AdddeviceComponent } from './adddevice/adddevice.component';
+import { UsersComponent } from './users/users.component';
 
 let routes = [
     {
         path: '',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [LoginGuard]
     },
     {
         path: 'register',
@@ -32,12 +36,17 @@ let routes = [
         path: 'devices',
         component: DevicesComponent,
         canActivate: [AuthGuard]
-
     },
     {
         path: 'adddevice',
         component: AdddeviceComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AdminGuard]
+
+    },
+    {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [AdminGuard]
 
     }
 ];
@@ -49,6 +58,7 @@ let routes = [
     DevicesComponent,
     TableComponent,
     AdddeviceComponent,
+    UsersComponent,
   ],
   imports: [
       BrowserModule,
@@ -64,7 +74,7 @@ let routes = [
           }
       )
   ],
-  providers: [AuthGuard, DataService, AuthService, { provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [AuthGuard, DataService, AuthService, { provide: APP_BASE_HREF, useValue: '/' },LoginGuard,AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

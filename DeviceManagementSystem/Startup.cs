@@ -43,12 +43,13 @@ namespace DeviceManagementSystem
                 options.Password.RequiredLength = 4;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
 
             }).AddEntityFrameworkStores<DMSContext>();
 
             services.AddTransient<CreateAdmin>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,12 +61,19 @@ namespace DeviceManagementSystem
             }
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc(cfg =>
             {
                 cfg.MapRoute("Default",
                     "{controller}/{action}/{id?}",
                     new { controller = "Home", action = "Index" });
             });
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DMSContext>();
+                context.Database.Migrate();
+            }
 
             using (var scope = app.ApplicationServices.CreateScope())
             {

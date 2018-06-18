@@ -1,5 +1,6 @@
 ﻿using DeviceManagementSystem.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace DeviceManagementSystem.Data.Admin
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly DMSContext _context;
 
-        public CreateAdmin(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public CreateAdmin(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, DMSContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
         public async Task createAdminRoleandUser()
         {
@@ -33,7 +36,9 @@ namespace DeviceManagementSystem.Data.Admin
 
                 var user = new User();
                 user.UserName = "admin";
+                user.Name = "admin";
                 string password = "admin";
+
 
                 IdentityResult chkUser = await _userManager.CreateAsync(user, password);
 

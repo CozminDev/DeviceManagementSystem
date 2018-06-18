@@ -29,6 +29,9 @@ export class AppComponent {
     goToAddDevice() {
         return this.router.navigate(['adddevice'])
     }
+    goToUsers() {
+        return this.router.navigate(['users'])
+    }
 
     isLoggedIn() {
         return this.auth.isLoggedIn
@@ -44,7 +47,13 @@ export class AppComponent {
     }
 
     Logout() {
-        localStorage.clear();
-        return this.reloadPage();
+        
+        return this.auth.Logout().subscribe(success =>
+        {
+            console.log(success)
+            localStorage.clear();
+            this.reloadPage();
+        });
+       
     }
 }

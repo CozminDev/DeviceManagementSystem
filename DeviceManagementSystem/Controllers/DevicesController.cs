@@ -1,6 +1,7 @@
 ﻿using DeviceManagementSystem.Data;
 using DeviceManagementSystem.Data.Entities;
 using DeviceManagementSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ namespace DeviceManagementSystem.Controllers
             _logger = logger;
             _userManager = userManager;
         }
-
+        
         [HttpGet]
         public IActionResult GetAllDevices()
         {

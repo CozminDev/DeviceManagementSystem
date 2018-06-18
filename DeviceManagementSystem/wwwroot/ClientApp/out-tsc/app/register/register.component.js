@@ -16,6 +16,7 @@ var RegisterComponent = /** @class */ (function () {
     function RegisterComponent(auth, router) {
         this.auth = auth;
         this.router = router;
+        this.errorMessage = [];
         this.registerInfo = {
             Name: "",
             password: "",
@@ -38,7 +39,7 @@ var RegisterComponent = /** @class */ (function () {
         this.registerInfo.Name = '';
         this.registerInfo.password = '';
         this.registerInfo.location = '';
-        this.errorMessage = '';
+        this.errorMessage = [];
         this.successMessage = '';
     };
     RegisterComponent = __decorate([

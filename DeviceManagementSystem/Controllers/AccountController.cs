@@ -52,7 +52,7 @@ namespace DeviceManagementSystem.Controllers
                 }
                 return BadRequest(errors);
             }
-            return new OkObjectResult("Account created");
+            return Ok();
         }
 
         [HttpPost("login")]
@@ -76,10 +76,17 @@ namespace DeviceManagementSystem.Controllers
             {
                 return BadRequest("Incorrect Account");
             }
-
+            
             return new OkObjectResult(model.Name);
         }
 
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+            return Ok();
+        }
     }
 
 }

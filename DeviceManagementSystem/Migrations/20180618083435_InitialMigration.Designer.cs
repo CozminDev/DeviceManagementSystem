@@ -11,7 +11,7 @@ using System;
 namespace DeviceManagementSystem.Migrations
 {
     [DbContext(typeof(DMSContext))]
-    [Migration("20180607083453_InitialMigration")]
+    [Migration("20180618083435_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace DeviceManagementSystem.Migrations
                     b.ToTable("Devices");
                 });
 
-            modelBuilder.Entity("DeviceManagementSystem.Data.Entities.DMSUser", b =>
+            modelBuilder.Entity("DeviceManagementSystem.Data.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -214,7 +214,7 @@ namespace DeviceManagementSystem.Migrations
 
             modelBuilder.Entity("DeviceManagementSystem.Data.Entities.Device", b =>
                 {
-                    b.HasOne("DeviceManagementSystem.Data.Entities.DMSUser", "User")
+                    b.HasOne("DeviceManagementSystem.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -229,7 +229,7 @@ namespace DeviceManagementSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DeviceManagementSystem.Data.Entities.DMSUser")
+                    b.HasOne("DeviceManagementSystem.Data.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -237,7 +237,7 @@ namespace DeviceManagementSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DeviceManagementSystem.Data.Entities.DMSUser")
+                    b.HasOne("DeviceManagementSystem.Data.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -250,7 +250,7 @@ namespace DeviceManagementSystem.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DeviceManagementSystem.Data.Entities.DMSUser")
+                    b.HasOne("DeviceManagementSystem.Data.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -258,7 +258,7 @@ namespace DeviceManagementSystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DeviceManagementSystem.Data.Entities.DMSUser")
+                    b.HasOne("DeviceManagementSystem.Data.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

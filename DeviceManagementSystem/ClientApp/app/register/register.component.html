@@ -4,7 +4,7 @@
             <mat-card-title><h3>Register</h3></mat-card-title>
         </mat-card-header>
         <br />
-        <div class="alert alert-danger" *ngIf="errorMessage"><div *ngFor="let error of errorMessage">{{error}}</div></div>
+        <div class="alert alert-danger" *ngIf="errorMessage.length>0"><div *ngFor="let error of errorMessage">{{error}}</div></div>
         <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
         <mat-card-content>
             <form>

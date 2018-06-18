@@ -4,6 +4,7 @@
         <mat-icon class="example-icon" (click)="goToDevices()" *ngIf="isLoggedIn()">important_devices</mat-icon>
         <button mat-button (click)="goToDevices()" *ngIf="isLoggedIn()">Devices</button>
         <button mat-button (click)="goToAddDevice()" *ngIf="isLoggedIn() && isAdmin()">Add Device</button>
+        <button mat-button (click)="goToUsers()" *ngIf="isLoggedIn() && isAdmin()">Users</button>
         <button mat-button (click)="goToRegister()" *ngIf="!isLoggedIn()">Register</button>
         <span class="example-spacer"></span>
         <button mat-button (click)="Logout()" *ngIf="isLoggedIn()">Logout</button>

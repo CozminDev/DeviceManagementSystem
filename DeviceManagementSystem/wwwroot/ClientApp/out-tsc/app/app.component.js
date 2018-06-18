@@ -32,6 +32,9 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.goToAddDevice = function () {
         return this.router.navigate(['adddevice']);
     };
+    AppComponent.prototype.goToUsers = function () {
+        return this.router.navigate(['users']);
+    };
     AppComponent.prototype.isLoggedIn = function () {
         return this.auth.isLoggedIn;
     };
@@ -43,8 +46,12 @@ var AppComponent = /** @class */ (function () {
             return false;
     };
     AppComponent.prototype.Logout = function () {
-        localStorage.clear();
-        return this.reloadPage();
+        var _this = this;
+        return this.auth.Logout().subscribe(function (success) {
+            console.log(success);
+            localStorage.clear();
+            _this.reloadPage();
+        });
     };
     AppComponent = __decorate([
         core_1.Component({

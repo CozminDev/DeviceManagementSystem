@@ -39,6 +39,12 @@ var AuthService = /** @class */ (function () {
             responseType: 'json'
         });
     };
+    AuthService.prototype.Logout = function () {
+        return this.http.post("api/account/logout", {
+            observe: 'response',
+            responseType: 'json'
+        });
+    };
     AuthService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

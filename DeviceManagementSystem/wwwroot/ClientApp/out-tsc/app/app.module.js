@@ -14,20 +14,23 @@ var router_1 = require("@angular/router");
 var http_1 = require("@angular/common/http");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
-//AuthGuard
 var auth_guard_1 = require("./Guard/auth.guard");
 var data_service_1 = require("./service/data.service");
 var auth_service_1 = require("./service/auth.service");
+var login_guard_1 = require("./Guard/login.guard");
+var admin_guard_1 = require("./Guard/admin.guard");
 var app_component_1 = require("./app.component");
 var register_component_1 = require("./register/register.component");
 var login_component_1 = require("./login/login.component");
 var devices_component_1 = require("./devices/devices.component");
 var table_component_1 = require("./devices/table/table.component");
 var adddevice_component_1 = require("./adddevice/adddevice.component");
+var users_component_1 = require("./users/users.component");
 var routes = [
     {
         path: '',
-        component: login_component_1.LoginComponent
+        component: login_component_1.LoginComponent,
+        canActivate: [login_guard_1.LoginGuard]
     },
     {
         path: 'register',
@@ -41,7 +44,12 @@ var routes = [
     {
         path: 'adddevice',
         component: adddevice_component_1.AdddeviceComponent,
-        canActivate: [auth_guard_1.AuthGuard]
+        canActivate: [admin_guard_1.AdminGuard]
+    },
+    {
+        path: 'users',
+        component: users_component_1.UsersComponent,
+        canActivate: [admin_guard_1.AdminGuard]
     }
 ];
 var AppModule = /** @class */ (function () {
@@ -56,6 +64,7 @@ var AppModule = /** @class */ (function () {
                 devices_component_1.DevicesComponent,
                 table_component_1.TableComponent,
                 adddevice_component_1.AdddeviceComponent,
+                users_component_1.UsersComponent,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -69,7 +78,7 @@ var AppModule = /** @class */ (function () {
                     enableTracing: true
                 })
             ],
-            providers: [auth_guard_1.AuthGuard, data_service_1.DataService, auth_service_1.AuthService, { provide: common_1.APP_BASE_HREF, useValue: '/' }],
+            providers: [auth_guard_1.AuthGuard, data_service_1.DataService, auth_service_1.AuthService, { provide: common_1.APP_BASE_HREF, useValue: '/' }, login_guard_1.LoginGuard, admin_guard_1.AdminGuard],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

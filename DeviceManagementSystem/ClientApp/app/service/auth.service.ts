@@ -39,4 +39,11 @@ export class AuthService {
         });
     }
 
+    Logout() {
+
+        return this.http.post("api/account/logout", {
+            observe: 'response',
+            responseType: 'json'
+        });
+    }
 }
