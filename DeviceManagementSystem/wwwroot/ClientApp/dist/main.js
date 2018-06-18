@@ -870,7 +870,7 @@ module.exports = "\r\n.center {\r\n    width: 75%;\r\n    margin: 10px auto;\r\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main-div\">\r\n    <mat-card class=\"example-card center\">\r\n        <mat-card-header>\r\n            <mat-card-title><h3>Register</h3></mat-card-title>\r\n        </mat-card-header>\r\n        <br />\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage.length>0\"><div *ngFor=\"let error of errorMessage\">{{error}}</div></div>\r\n        <div class=\"alert alert-success\" *ngIf=\"successMessage\">{{successMessage}}</div>\r\n        <mat-card-content>\r\n            <form>\r\n                <table>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Name\" [(ngModel)]=\"registerInfo.Name\" name=\"Name\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Password\" [(ngModel)]=\"registerInfo.password\" type=\"password\" name=\"password\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Location\" [(ngModel)]=\"registerInfo.location\" name=\"location\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n            </form>\r\n            <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n            <button mat-raised-button (click)=\"onRegister()\" color=\"primary\" style=\"margin-left:40%\">Register</button>\r\n        </mat-card-actions>\r\n    </mat-card>\r\n</div>\r\n"
+module.exports = "<div class=\"main-div\">\r\n    <mat-card class=\"example-card center\">\r\n        <mat-card-header>\r\n            <mat-card-title><h3>Register</h3></mat-card-title>\r\n        </mat-card-header>\r\n        <br />\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorText\">{{errorText}}</div>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage.length>0\"><div *ngFor=\"let error of errorMessage\">{{error}}</div></div>\r\n        <div class=\"alert alert-success\" *ngIf=\"successMessage\">{{successMessage}}</div>\r\n        <mat-card-content>\r\n            <form>\r\n                <table>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Name\" [(ngModel)]=\"registerInfo.Name\" name=\"Name\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Password\" [(ngModel)]=\"registerInfo.password\" type=\"password\" name=\"password\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                    <tr>\r\n                        <td>\r\n                            <mat-form-field style=\"width:350px !important;\" class=\"example-full-width\">\r\n                                <input matInput placeholder=\"Location\" [(ngModel)]=\"registerInfo.location\" name=\"location\">\r\n                            </mat-form-field>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n            </form>\r\n            <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner>\r\n        </mat-card-content>\r\n        <mat-card-actions>\r\n            <button mat-raised-button (click)=\"onRegister()\" color=\"primary\" style=\"margin-left:40%\">Register</button>\r\n        </mat-card-actions>\r\n    </mat-card>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -921,12 +921,18 @@ var RegisterComponent = /** @class */ (function () {
             }
         }, function (err) {
             console.log(err);
-            _this.errorMessage = err.error;
+            if (typeof err.error === 'string') {
+                _this.errorText = err.error;
+            }
+            else {
+                _this.errorMessage = err.error;
+            }
         });
         this.registerInfo.Name = '';
         this.registerInfo.password = '';
         this.registerInfo.location = '';
         this.errorMessage = [];
+        this.errorText = '';
         this.successMessage = '';
     };
     RegisterComponent = __decorate([

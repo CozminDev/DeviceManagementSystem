@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
     }
 
+    public errorText: string;
     public errorMessage: any[]  = [];
     public successMessage: string;
 
@@ -33,14 +34,21 @@ export class RegisterComponent implements OnInit {
             }
         }, err => {
             console.log(err);
-            this.errorMessage = err.error;
+            if (typeof err.error === 'string')
+            {
+                this.errorText = err.error;
+            }
+            else
+            {
+                this.errorMessage = err.error;
+            }
 
         })
-
         this.registerInfo.Name = ''
         this.registerInfo.password = ''
         this.registerInfo.location = ''
         this.errorMessage = [];
+        this.errorText = '';
         this.successMessage = '';
     }
 
