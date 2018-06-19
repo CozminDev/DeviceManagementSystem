@@ -12,5 +12,7 @@ namespace DeviceManagementSystem.Data
         void UnassignDevice(int id);
         bool SaveChanges();
         void RemoveDevice(int id);
+        IEnumerable<User> GetAllUsers();
+        void DeleteUser(string username);
     }
 }

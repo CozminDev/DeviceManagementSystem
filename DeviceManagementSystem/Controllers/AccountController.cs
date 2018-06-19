@@ -1,7 +1,11 @@
-﻿using DeviceManagementSystem.Data.Entities;
+﻿using DeviceManagementSystem.Data;
+using DeviceManagementSystem.Data.Entities;
 using DeviceManagementSystem.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,11 +16,15 @@ namespace DeviceManagementSystem.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IDMSRepository _repo;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(UserManager<User> userManager,SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager,SignInManager<User> signInManager,IDMSRepository repo,ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _repo = repo;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -86,6 +94,38 @@ namespace DeviceManagementSystem.Controllers
             await _signInManager.SignOutAsync();
 
             return Ok();
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpGet("getusers")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                var result = _repo.GetAllUsers();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Cannot get Users: {ex}");
+
+                return StatusCode(500, "Cannot get Users");
+            }
+
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpDelete("deleteuser/{username}")]
+        public IActionResult DeleteUser(string username)
+        {
+            _repo.DeleteUser(username);
+            if (_repo.SaveChanges())
+            {
+                return Ok();
+            }
+
+            return StatusCode(500, "Cannot delete User");
         }
     }
 

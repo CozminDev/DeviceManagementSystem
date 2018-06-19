@@ -6,16 +6,16 @@ import { Router } from '@angular/router'
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private auth: AuthService, private router: Router) { }
+    constructor(private auth: AuthService, private router: Router) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this.auth.isLoggedIn && localStorage.getItem('user') == 'admin') return true
-      else return false;    
-  }
+    canActivate(
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        if (this.auth.isLoggedIn && localStorage.getItem('user') == 'admin') return true
+        else return false;
+    }
 }

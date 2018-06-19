@@ -23,7 +23,7 @@ namespace DeviceManagementSystem.Controllers
             _logger = logger;
             _userManager = userManager;
         }
-        
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllDevices()
         {
@@ -40,7 +40,7 @@ namespace DeviceManagementSystem.Controllers
                 return StatusCode(500, "Cannot get Devices");
             }
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public IActionResult AddDevice([FromBody]DeviceViewModel model)
         {
@@ -101,7 +101,7 @@ namespace DeviceManagementSystem.Controllers
             return StatusCode(500, "Cannot unassign Device");
 
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpDelete("{id}")]
         public IActionResult RemoveDevice(int id)
         {
@@ -113,5 +113,6 @@ namespace DeviceManagementSystem.Controllers
 
             return StatusCode(500, "Cannot remove Device");
         }
+
     }
 }

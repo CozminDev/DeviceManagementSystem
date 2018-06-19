@@ -25,19 +25,26 @@ export class RegisterComponent implements OnInit {
     }
 
     onRegister() {
-        this.auth.Register(this.registerInfo).subscribe(success => {
-            if (success.status == 200) {
+        this.auth.Register(this.registerInfo).subscribe(success =>
+        {
+            if (success.status == 200)
+            {
+
                 console.log(success);
+
                 this.successMessage = "Registration successful!"
 
 
             }
         }, err => {
+
             console.log(err);
+
             if (typeof err.error === 'string')
             {
                 this.errorText = err.error;
             }
+
             else
             {
                 this.errorMessage = err.error;

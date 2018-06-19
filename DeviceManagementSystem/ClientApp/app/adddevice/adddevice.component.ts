@@ -28,7 +28,9 @@ export class AdddeviceComponent implements OnInit {
       this.data.addDevice(this.addInfo).subscribe(success =>
       {
           console.log(success)
+
           this.router.navigate(['devices'])
+
       },err=>console.log(err))
   }
 

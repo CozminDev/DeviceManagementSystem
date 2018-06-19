@@ -24,9 +24,20 @@ namespace DeviceManagementSystem.Data
             GetDeviceById(id).User = user;
         }
 
+        public void DeleteUser(string username)
+        {
+            var user = _context.Users.Where(p => p.UserName == username).FirstOrDefault();
+            _context.Users.Remove(user);
+        }
+
         public IEnumerable<Device> GetAllDevices()
         {
             return _context.Devices.Include(q => q.User).ToList();
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.Where(p => p.Name != "admin").ToList();
         }
 
         public Device GetDeviceById(int id)

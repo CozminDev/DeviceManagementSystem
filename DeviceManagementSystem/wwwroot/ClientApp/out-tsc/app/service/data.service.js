@@ -14,7 +14,6 @@ var http_1 = require("@angular/common/http");
 var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
-        this.devices = [];
     }
     DataService.prototype.getDevices = function () {
         return this.http.get("api/devices");

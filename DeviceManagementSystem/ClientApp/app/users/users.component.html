@@ -1,3 +1,19 @@
-<p>
-  users works!
-</p>
+<div class="container" style="margin-top:50px">
+    <mat-accordion class="example-headers-align">
+        <div *ngFor="let user of users">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{user.name}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{user.location}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-list-item role="listitem">
+                    <button mat-button color="warn" (click)="deleteUser(user.userName)">Delete User</button>
+                </mat-list-item>
+            </mat-expansion-panel>
+        </div>
+    </mat-accordion>
+</div>

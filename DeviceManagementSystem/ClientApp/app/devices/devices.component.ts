@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../service/data.service';
-import { Device } from '../service/device';
 
 @Component({
   selector: 'app-devices',
@@ -9,14 +8,10 @@ import { Device } from '../service/device';
 })
 export class DevicesComponent implements OnInit {
 
-    constructor() { }
-
-    
-
+  constructor() { }
+   
   ngOnInit() {
       
-
-
   }
 
 }

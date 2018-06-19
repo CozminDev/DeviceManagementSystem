@@ -51,30 +51,30 @@ let routes = [
     }
 ];
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    DevicesComponent,
-    TableComponent,
-    AdddeviceComponent,
-    UsersComponent,
-  ],
-  imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      MaterialModule,
-      HttpClientModule,
-      FormsModule,
-      RouterModule.forRoot(routes,
-          {
-              onSameUrlNavigation: 'reload',
-              useHash:true,
-              enableTracing: true
-          }
-      )
-  ],
-  providers: [AuthGuard, DataService, AuthService, { provide: APP_BASE_HREF, useValue: '/' },LoginGuard,AdminGuard],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RegisterComponent,
+        LoginComponent,
+        DevicesComponent,
+        TableComponent,
+        AdddeviceComponent,
+        UsersComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot(routes,
+            {
+                onSameUrlNavigation: 'reload',
+                useHash: true,
+                enableTracing: true
+            }
+        )
+    ],
+    providers: [AuthGuard, DataService, AuthService, { provide: APP_BASE_HREF, useValue: '/' }, LoginGuard, AdminGuard],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

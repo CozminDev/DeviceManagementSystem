@@ -34,12 +34,18 @@ var RegisterComponent = /** @class */ (function () {
             }
         }, function (err) {
             console.log(err);
-            _this.errorMessage = err.error;
+            if (typeof err.error === 'string') {
+                _this.errorText = err.error;
+            }
+            else {
+                _this.errorMessage = err.error;
+            }
         });
         this.registerInfo.Name = '';
         this.registerInfo.password = '';
         this.registerInfo.location = '';
         this.errorMessage = [];
+        this.errorText = '';
         this.successMessage = '';
     };
     RegisterComponent = __decorate([

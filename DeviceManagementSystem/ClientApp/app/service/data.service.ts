@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Device } from './device';
 import { Http, Response } from '@angular/http';
-import { DMSUser } from './device'
 
 @Injectable()
 
@@ -13,8 +11,6 @@ export class DataService {
     constructor(private http: HttpClient) {
 
     }
-
-    public devices: Device[] = [];
 
     getDevices(): Observable<any> {
 

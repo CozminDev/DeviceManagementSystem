@@ -12,12 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var data_service_1 = require("../../service/data.service");
 var router_1 = require("@angular/router");
-var core_2 = require("@angular/core");
 var TableComponent = /** @class */ (function () {
-    function TableComponent(data, router, cd) {
+    function TableComponent(data, router) {
         this.data = data;
         this.router = router;
-        this.cd = cd;
         this.devices = [];
     }
     TableComponent.prototype.ngOnInit = function () {
@@ -47,7 +45,6 @@ var TableComponent = /** @class */ (function () {
     TableComponent.prototype.unassignItem = function (id) {
         var _this = this;
         return this.data.unassignDevice(id).subscribe(function (success) {
-            _this.cd.markForCheck();
             console.log(success);
             _this.getDevices();
         });
@@ -71,7 +68,7 @@ var TableComponent = /** @class */ (function () {
             templateUrl: './table.component.html',
             styleUrls: ['./table.component.css']
         }),
-        __metadata("design:paramtypes", [data_service_1.DataService, router_1.Router, core_2.ChangeDetectorRef])
+        __metadata("design:paramtypes", [data_service_1.DataService, router_1.Router])
     ], TableComponent);
     return TableComponent;
 }());

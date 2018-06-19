@@ -45,6 +45,18 @@ var AuthService = /** @class */ (function () {
             responseType: 'json'
         });
     };
+    AuthService.prototype.getUsers = function () {
+        return this.http.get("api/account/getusers", {
+            observe: 'response',
+            responseType: 'json'
+        });
+    };
+    AuthService.prototype.deleteUser = function (username) {
+        return this.http.delete("api/account/deleteuser/" + username, {
+            observe: 'response',
+            responseType: 'text'
+        });
+    };
     AuthService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

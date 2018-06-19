@@ -10,10 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var auth_service_1 = require("../service/auth.service");
 var UsersComponent = /** @class */ (function () {
-    function UsersComponent() {
+    function UsersComponent(auth) {
+        this.auth = auth;
+        this.users = [];
     }
     UsersComponent.prototype.ngOnInit = function () {
+        this.getAllUsers();
+    };
+    UsersComponent.prototype.getAllUsers = function () {
+        var _this = this;
+        return this.auth.getUsers().subscribe(function (success) {
+            console.log(success);
+            _this.users = success.body;
+        });
+    };
+    UsersComponent.prototype.deleteUser = function (username) {
+        var _this = this;
+        return this.auth.deleteUser(username).subscribe(function (success) {
+            console.log(success);
+            _this.getAllUsers();
+        });
     };
     UsersComponent = __decorate([
         core_1.Component({
@@ -21,7 +39,7 @@ var UsersComponent = /** @class */ (function () {
             templateUrl: './users.component.html',
             styleUrls: ['./users.component.css']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [auth_service_1.AuthService])
     ], UsersComponent);
     return UsersComponent;
 }());
