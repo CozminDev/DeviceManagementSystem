@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     }
 
     onRegister() {
-        this.auth.Register(this.registerInfo).subscribe(success =>
+        this.auth.register(this.registerInfo).subscribe(success =>
         {
             if (success.status == 200)
             {

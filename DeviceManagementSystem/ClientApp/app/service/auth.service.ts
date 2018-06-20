@@ -13,7 +13,7 @@ export class AuthService {
 
     public isLoggedIn: boolean = JSON.parse(localStorage.getItem('loggedIn') || 'false')
 
-    LoggingIn(value: boolean) {
+    setLoginStatus(value: boolean) {
         this.isLoggedIn = value;
         localStorage.setItem('loggedIn', 'true');
     }
@@ -22,7 +22,7 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('loggedIn') || this.isLoggedIn.toString())
     }
 
-    Login(loginInfo) {
+    login(loginInfo) {
 
         return this.http.post("api/account/login", loginInfo,
             {
@@ -31,7 +31,7 @@ export class AuthService {
             });
     }
 
-    Register(registerInfo) {
+    register(registerInfo) {
 
         return this.http.post("api/account/register", registerInfo, {
             observe: 'response',
@@ -39,7 +39,7 @@ export class AuthService {
         });
     }
 
-    Logout() {
+    logout() {
 
         return this.http.post("api/account/logout", {
             observe: 'response',

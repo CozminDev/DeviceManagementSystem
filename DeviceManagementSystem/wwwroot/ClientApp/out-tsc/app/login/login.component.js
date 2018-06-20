@@ -25,9 +25,9 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.onLogin = function () {
         var _this = this;
-        this.auth.Login(this.loginInfo).subscribe(function (success) {
+        this.auth.login(this.loginInfo).subscribe(function (success) {
             if (success.status == 200) {
-                _this.auth.LoggingIn(true);
+                _this.auth.setLoginStatus(true);
                 localStorage.setItem('user', success.body);
                 return _this.router.navigate(["devices"]);
             }

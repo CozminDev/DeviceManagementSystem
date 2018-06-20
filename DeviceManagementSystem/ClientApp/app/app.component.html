@@ -7,7 +7,7 @@
         <button mat-button (click)="goToUsers()" *ngIf="isLoggedIn() && isAdmin()">Users</button>
         <button mat-button (click)="goToRegister()" *ngIf="!isLoggedIn()">Register</button>
         <span class="example-spacer"></span>
-        <button mat-button (click)="Logout()" *ngIf="isLoggedIn()">Logout</button>
+        <button mat-button (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
     </mat-toolbar-row>
 </mat-toolbar>
 <main>

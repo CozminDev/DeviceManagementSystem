@@ -382,7 +382,7 @@ module.exports = ".example-spacer {\r\n    flex: 1 1 auto;\r\n}\r\n.example-icon
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToLogin()\" *ngIf=\"!isLoggedIn()\">important_devices</mat-icon>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn() && isAdmin()\">Add Device</button>\r\n        <button mat-button (click)=\"goToUsers()\" *ngIf=\"isLoggedIn() && isAdmin()\">Users</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"Logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<main>\r\n    <router-outlet>\r\n    </router-outlet>\r\n</main>\r\n\r\n"
+module.exports = "<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToLogin()\" *ngIf=\"!isLoggedIn()\">important_devices</mat-icon>\r\n        <mat-icon class=\"example-icon\" (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">important_devices</mat-icon>\r\n        <button mat-button (click)=\"goToDevices()\" *ngIf=\"isLoggedIn()\">Devices</button>\r\n        <button mat-button (click)=\"goToAddDevice()\" *ngIf=\"isLoggedIn() && isAdmin()\">Add Device</button>\r\n        <button mat-button (click)=\"goToUsers()\" *ngIf=\"isLoggedIn() && isAdmin()\">Users</button>\r\n        <button mat-button (click)=\"goToRegister()\" *ngIf=\"!isLoggedIn()\">Register</button>\r\n        <span class=\"example-spacer\"></span>\r\n        <button mat-button (click)=\"logout()\" *ngIf=\"isLoggedIn()\">Logout</button>\r\n    </mat-toolbar-row>\r\n</mat-toolbar>\r\n<main>\r\n    <router-outlet>\r\n    </router-outlet>\r\n</main>\r\n\r\n"
 
 /***/ }),
 
@@ -444,9 +444,9 @@ var AppComponent = /** @class */ (function () {
         else
             return false;
     };
-    AppComponent.prototype.Logout = function () {
+    AppComponent.prototype.logout = function () {
         var _this = this;
-        return this.auth.Logout().subscribe(function (success) {
+        return this.auth.logout().subscribe(function (success) {
             console.log(success);
             localStorage.clear();
             _this.reloadPage();
@@ -821,9 +821,9 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent.prototype.onLogin = function () {
         var _this = this;
-        this.auth.Login(this.loginInfo).subscribe(function (success) {
+        this.auth.login(this.loginInfo).subscribe(function (success) {
             if (success.status == 200) {
-                _this.auth.LoggingIn(true);
+                _this.auth.setLoginStatus(true);
                 localStorage.setItem('user', success.body);
                 return _this.router.navigate(["devices"]);
             }
@@ -908,7 +908,7 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.onRegister = function () {
         var _this = this;
-        this.auth.Register(this.registerInfo).subscribe(function (success) {
+        this.auth.register(this.registerInfo).subscribe(function (success) {
             if (success.status == 200) {
                 console.log(success);
                 _this.successMessage = "Registration successful!";
@@ -972,7 +972,7 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.isLoggedIn = JSON.parse(localStorage.getItem('loggedIn') || 'false');
     }
-    AuthService.prototype.LoggingIn = function (value) {
+    AuthService.prototype.setLoginStatus = function (value) {
         this.isLoggedIn = value;
         localStorage.setItem('loggedIn', 'true');
     };
@@ -983,19 +983,19 @@ var AuthService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    AuthService.prototype.Login = function (loginInfo) {
+    AuthService.prototype.login = function (loginInfo) {
         return this.http.post("api/account/login", loginInfo, {
             observe: 'response',
             responseType: 'text'
         });
     };
-    AuthService.prototype.Register = function (registerInfo) {
+    AuthService.prototype.register = function (registerInfo) {
         return this.http.post("api/account/register", registerInfo, {
             observe: 'response',
             responseType: 'json'
         });
     };
-    AuthService.prototype.Logout = function () {
+    AuthService.prototype.logout = function () {
         return this.http.post("api/account/logout", {
             observe: 'response',
             responseType: 'json'

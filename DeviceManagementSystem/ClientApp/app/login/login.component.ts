@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
     }
 
     onLogin() {
-        this.auth.Login(this.loginInfo).subscribe(success =>
+        this.auth.login(this.loginInfo).subscribe(success =>
         {
             if (success.status == 200)
             {
-                this.auth.LoggingIn(true);
+                this.auth.setLoginStatus(true);
 
                 localStorage.setItem('user', success.body);
 

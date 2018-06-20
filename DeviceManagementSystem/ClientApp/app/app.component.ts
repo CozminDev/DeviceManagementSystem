@@ -46,9 +46,9 @@ export class AppComponent {
         else return false;
     }
 
-    Logout() {
+    logout() {
         
-        return this.auth.Logout().subscribe(success =>
+        return this.auth.logout().subscribe(success =>
         {
             console.log(success)
             localStorage.clear();

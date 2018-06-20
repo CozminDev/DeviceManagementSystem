@@ -16,7 +16,7 @@ var AuthService = /** @class */ (function () {
         this.http = http;
         this.isLoggedIn = JSON.parse(localStorage.getItem('loggedIn') || 'false');
     }
-    AuthService.prototype.LoggingIn = function (value) {
+    AuthService.prototype.setLoginStatus = function (value) {
         this.isLoggedIn = value;
         localStorage.setItem('loggedIn', 'true');
     };
@@ -27,19 +27,19 @@ var AuthService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    AuthService.prototype.Login = function (loginInfo) {
+    AuthService.prototype.login = function (loginInfo) {
         return this.http.post("api/account/login", loginInfo, {
             observe: 'response',
             responseType: 'text'
         });
     };
-    AuthService.prototype.Register = function (registerInfo) {
+    AuthService.prototype.register = function (registerInfo) {
         return this.http.post("api/account/register", registerInfo, {
             observe: 'response',
             responseType: 'json'
         });
     };
-    AuthService.prototype.Logout = function () {
+    AuthService.prototype.logout = function () {
         return this.http.post("api/account/logout", {
             observe: 'response',
             responseType: 'json'

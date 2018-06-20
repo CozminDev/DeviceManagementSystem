@@ -45,9 +45,9 @@ var AppComponent = /** @class */ (function () {
         else
             return false;
     };
-    AppComponent.prototype.Logout = function () {
+    AppComponent.prototype.logout = function () {
         var _this = this;
-        return this.auth.Logout().subscribe(function (success) {
+        return this.auth.logout().subscribe(function (success) {
             console.log(success);
             localStorage.clear();
             _this.reloadPage();

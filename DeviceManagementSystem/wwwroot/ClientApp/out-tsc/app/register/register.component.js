@@ -27,7 +27,7 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.onRegister = function () {
         var _this = this;
-        this.auth.Register(this.registerInfo).subscribe(function (success) {
+        this.auth.register(this.registerInfo).subscribe(function (success) {
             if (success.status == 200) {
                 console.log(success);
                 _this.successMessage = "Registration successful!";

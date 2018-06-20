@@ -19,8 +19,8 @@ namespace DeviceManagementSystem.Data.Admin
         public async Task createAdminRoleandUser()
         {
 
-            bool x = await _roleManager.RoleExistsAsync("Admin");
-            if (!x)
+            bool checkRole = await _roleManager.RoleExistsAsync("Admin");
+            if (!checkRole)
             {
 
                 var role = new IdentityRole();
@@ -35,9 +35,9 @@ namespace DeviceManagementSystem.Data.Admin
                 string password = "admin";
 
 
-                IdentityResult chkUser = await _userManager.CreateAsync(user, password);
+                IdentityResult checkUser = await _userManager.CreateAsync(user, password);
 
-                if (chkUser.Succeeded)
+                if (checkUser.Succeeded)
                 {
                     var result = await _userManager.AddToRoleAsync(user, "Admin");
                 }
